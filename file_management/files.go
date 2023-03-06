@@ -1,8 +1,8 @@
-package filemanagement
+package file_management
 
 import "fmt"
 
-func sayHello(){
+func SayHello(){
 
 	fmt.Println("Hello from file management")
 }

@@ -2,13 +2,13 @@ package main
 
 import(
 	"fmt"
-	"github.com/jochaes/Proyecto_1_Lenguajes_Imperativo/pkg/file_management/filemanagement"
+	"github.com/jochaes/Proyecto_1_Lenguajes_Imperativo/file_management"
 )
 
 
 func main(){
 
-	filemanagement.sayHello()
+	file_management.SayHello()
 	fmt.Println("Hello from main")
 
 }
