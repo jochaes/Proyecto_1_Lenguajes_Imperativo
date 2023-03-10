@@ -5,11 +5,11 @@ import (
 	"strings"
 )
 
-/**
-	Decodifica la instrucción y la ejecuta 
+/*
+Decodifica la instrucción y la ejecuta 
 	instruccion: instruccion a decodificar
 	pcPTR: Program Counter
-**/
+*/
 func DecodeExecute(instruction string, pcPtr *int){
 
 	fmt.Println("Decoding", instruction)

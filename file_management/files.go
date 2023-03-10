@@ -1,7 +1,6 @@
-/**
+/*
 Este paquete se encarga de las operaciones sobre archivos (abrir, leer, cerrar)
-**/
-
+*/
 package file_management
 
 import (
@@ -11,10 +10,10 @@ import (
 	"os"
 )
 
-/**
-	Abre y devuelve el puntero a un archivo
+/*
+Abre y devuelve el puntero a un archivo
 	fileName: ruta del archivo
-**/
+*/
 func OpenFile(fileName string) *os.File {
 
 	//Abre el Archivo
@@ -28,12 +27,11 @@ func OpenFile(fileName string) *os.File {
 	return f
 }
 
-// Reads file and returns all lines in a slice
-/**
- Lee, guarda y devuelve las lineas en un slice 
+
+/*
+Lee, guarda y devuelve las lineas en un slice 
  filePtr: puntero al archivo abierto
- 
-**/
+ */
 func ReadFile(filePtr *os.File) []string {
 	var instructions []string     
 
@@ -51,10 +49,10 @@ func ReadFile(filePtr *os.File) []string {
 	return instructions
 }
 
-/**
-	Cierra un archivo previemante abierto 
+/*
+Cierra un archivo previemante abierto 
 	fileptr: puntero al archivo
-**/
+*/
 func CloseFile(filePtr *os.File) {
 	filePtr.Close()
 
