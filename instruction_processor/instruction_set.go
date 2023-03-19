@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/jochaes/Proyecto_1_Lenguajes_Imperativo/data_structures"
 	"strconv"
+	"reflect"
 )
 
 /*
@@ -162,15 +163,28 @@ func GetOperands(stack *data_structures.Stack, tipo string) (any,any){
 	}
 
 	if tipo == "str"{
-		op1,_ := any(operand1).(string)
-		op2,_ :=  any(operand2).(string)
-		return op1, op2
+		
+
+		if reflect.ValueOf(operand1).Kind() != reflect.String{
+			operand1 = strconv.Itoa( any(operand1).(int) )
+		}
+
+		if reflect.ValueOf(operand2).Kind() != reflect.String{
+			operand2 = strconv.Itoa( any(operand1).(int) )
+		}
 
 	}else{
-		op1,_ := strconv.Atoi( any(operand1).(string) )
-		op2,_ := strconv.Atoi( any(operand2).(string) )
-		return op1, op2
+
+		if reflect.ValueOf(operand1).Kind() != reflect.Int{
+			operand1,_ = strconv.Atoi( any(operand1).(string) )
+		}
+
+		if reflect.ValueOf(operand2).Kind() != reflect.Int{
+			operand2,_ = strconv.Atoi( any(operand2).(string) )
+		}
 	}
+
+	return operand1, operand2
 
 }
 
@@ -208,21 +222,21 @@ func compareOp[T any]( op T, stack *data_structures.Stack){
 	switch operator {
 		case "<":
 			if op1 < op2 {
-				stack.Push("TRUE")
+				stack.Push(1)
 			}else{
-				stack.Push("FALSE")
+				stack.Push(0)
 			}
 		case ">":
 			if op1 > op2 {
-				stack.Push("TRUE")
+				stack.Push(1)
 			}else{
-				stack.Push("FALSE")
+				stack.Push(0)
 			}
 		case "==":
 			if op1 == op2 {
-				stack.Push("TRUE")
+				stack.Push(1)
 			}else{
-				stack.Push("FALSE")
+				stack.Push(0)
 			}
 	}
 
@@ -248,3 +262,114 @@ func binarySubstract(stack *data_structures.Stack){
 	stack.Push(result)
 
 }
+
+/*
+Realiza una suma de los operandos (OP1 + OP2)
+	stack: Pila del programa en dónde se ecuentran los operandos 
+
+	carga el resultado de la suma en la pila
+*/
+func binaryAdd(stack *data_structures.Stack){
+
+	op1, op2 := GetOperands( stack, "int")
+
+	if op1 == nil || op2 == nil {
+		fmt.Println("ERROR GETTING OPERANDS")
+		return 
+	}
+
+	result := any(op1).(int) + any(op2).(int)
+
+	stack.Push(result)
+}
+
+/*
+Realiza una multiplicación de los operandos (OP1 * OP2)
+	stack: Pila del programa en dónde se ecuentran los operandos 
+
+	carga el resultado de la multiplicación en la pila
+*/
+func binaryMultiply(stack *data_structures.Stack){
+
+	op1, op2 := GetOperands( stack, "int")
+
+	if op1 == nil || op2 == nil {
+		fmt.Println("ERROR GETTING OPERANDS")
+		return 
+	}
+
+	result := any(op1).(int) * any(op2).(int)
+
+	stack.Push(result)
+}
+
+/*
+Realiza una división entera de los operandos (OP1 / OP2)
+	stack: Pila del programa en dónde se ecuentran los operandos 
+
+	carga el resultado de la división en la pila
+*/
+func binaryDivide(stack *data_structures.Stack){
+
+	op1, op2 := GetOperands( stack, "int")
+
+	if op1 == nil || op2 == nil {
+		fmt.Println("ERROR GETTING OPERANDS")
+		return 
+	}
+
+	result := any(op1).(int) / any(op2).(int)
+
+	stack.Push(result)
+}
+
+/*
+Realiza una división entera de los operandos (OP1 / OP2)
+	stack: Pila del programa en dónde se ecuentran los operandos 
+
+	carga el resultado de la división en la pila
+*/
+func binaryAnd(stack *data_structures.Stack){
+
+	op1, op2 := GetOperands( stack, "int")
+
+	if op1 == nil || op2 == nil {
+		fmt.Println("ERROR GETTING OPERANDS")
+		return 
+	}
+
+	newbool1 := op1 != 0
+	newbool2 := op2 != 0
+
+	if newbool1 && newbool2{
+		stack.Push(1)
+	}else{
+		stack.Push(0)
+	}
+}
+
+/*
+Realiza una división entera de los operandos (OP1 / OP2)
+	stack: Pila del programa en dónde se ecuentran los operandos 
+
+	carga el resultado de la división en la pila
+*/
+func binaryOr(stack *data_structures.Stack){
+
+	op1, op2 := GetOperands( stack, "int")
+
+	if op1 == nil || op2 == nil {
+		fmt.Println("ERROR GETTING OPERANDS")
+		return 
+	}
+
+	newbool1 := op1 != 0
+	newbool2 := op2 != 0
+
+	if newbool1 || newbool2{
+		stack.Push(1)
+	}else{
+		stack.Push(0)
+	}
+}
+

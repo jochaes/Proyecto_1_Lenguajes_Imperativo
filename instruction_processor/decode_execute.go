@@ -45,9 +45,29 @@ func DecodeExecute(instruction string, pcPtr *int, stack *data_structures.Stack,
 		compareOp(instructionList[1], stack)
 
 	case "BINARY_SUBSTRACT":
-		fmt.Println("Instruction decoded: BINARY_SUBSTRACt")
+		fmt.Println("Instruction decoded: BINARY_SUBSTRACT")
 		binarySubstract(stack)
 
+	case "BINARY_ADD":
+		fmt.Println("Instruction decoded: BINARY_ADD")
+		binaryAdd(stack)
+	
+	case "BINARY_MULTIPLY":
+		fmt.Println("Instruction decoded: BINARY_MULTIPLY")
+		binaryMultiply(stack)
+
+	case "BINARY_DIVIDE":
+		fmt.Println("Instruction decoded: BINARY_DIVIDE")
+		binaryDivide(stack)
+	
+	case "BINARY_AND":
+		fmt.Println("Instruction decoded: BINARY_AND")
+		binaryAnd(stack)
+
+	case "BINARY_OR":
+		fmt.Println("Instruction decoded: BINARY_OR")
+		binaryOr(stack)
+	
 	default:
 		fmt.Println("Instruction not implemented")
 		

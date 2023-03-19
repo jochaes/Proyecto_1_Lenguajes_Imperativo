@@ -91,8 +91,8 @@ func main(){
 		fmt.Println()
 	}
 
-	// fmt.Println("Stack y Almacen")
-	// fmt.Println(stack)
-	// fmt.Println(storage)
+	fmt.Println("Stack y Almacen")
+	fmt.Println(stack)
+	fmt.Println(storage)
 
 }

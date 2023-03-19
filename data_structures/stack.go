@@ -41,7 +41,7 @@ Devuelve el elemento al tope del stack
 */
 func (stack *Stack) Peek() (any,error) {
 	if len(*stack) > 0 {
-		fmt.Println("stack(pop):", (*stack))
+		fmt.Println("stack(Peek):", (*stack)) //Imprime todo el stack
 		 peekVal := (*stack)[len(*stack)-1]
 		return peekVal.Valor , nil
 	} else {
