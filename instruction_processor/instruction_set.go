@@ -145,6 +145,36 @@ func callFunction[T any]( params T, stack *data_structures.Stack ){
 //************************************ ************************************ ************************************
 
 /*
+Retorna los operandos para la funciones de Binary... Internamente hace dos pops a la pila y los retorna
+*/
+func GetOperands(stack *data_structures.Stack, tipo string) (any,any){
+
+	operand2,err := stack.Pop()
+	if err != nil{
+		fmt.Println(err)
+		return nil,nil
+	}
+
+	operand1, err := stack.Pop()
+	if err != nil{
+		fmt.Println(err)
+		return nil,nil
+	}
+
+	if tipo == "str"{
+		op1,_ := any(operand1).(string)
+		op2,_ :=  any(operand2).(string)
+		return op1, op2
+
+	}else{
+		op1,_ := strconv.Atoi( any(operand1).(string) )
+		op2,_ := strconv.Atoi( any(operand2).(string) )
+		return op1, op2
+	}
+
+}
+
+/*
 Realiza una comparación booleana según el op que reciba 
 	Los operandos deben ser números 
 	op: <, >, ==
@@ -195,5 +225,26 @@ func compareOp[T any]( op T, stack *data_structures.Stack){
 				stack.Push("FALSE")
 			}
 	}
+
+}
+
+/*
+Realiza una resta de los operandos (OP1 - OP2)
+	stack: Pila del programa en dónde se ecuentran los operandos 
+
+	carga el resultado de la resta la pila
+*/
+func binarySubstract(stack *data_structures.Stack){
+
+	op1, op2 := GetOperands( stack, "int")
+
+	if op1 == nil || op2 == nil {
+		fmt.Println("ERROR GETTING OPERANDS")
+		return 
+	}
+
+	result := any(op1).(int) - any(op2).(int)
+
+	stack.Push(result)
 
 }

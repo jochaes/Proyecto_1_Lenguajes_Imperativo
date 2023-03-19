@@ -39,6 +39,14 @@ func DecodeExecute(instruction string, pcPtr *int, stack *data_structures.Stack,
 	case "CALL_FUNCTION ":
 		fmt.Println("Instruction decoded: CALL_FUNCTION")
 		callFunction(instructionList[1], stack)
+	
+	case "COMPARE_OP ":
+		fmt.Println("Instruction decoded: COMPARE_OP")
+		compareOp(instructionList[1], stack)
+
+	case "BINARY_SUBSTRACT":
+		fmt.Println("Instruction decoded: BINARY_SUBSTRACt")
+		binarySubstract(stack)
 
 	default:
 		fmt.Println("Instruction not implemented")
