@@ -32,6 +32,14 @@ func DecodeExecute(instruction string, pcPtr *int, stack *data_structures.Stack,
 		fmt.Println("Instruction decoded: STORE_FAST")
 		storeFast(instructionList[1], stack, storage)
 
+	case "LOAD_GLOBAL ":
+		fmt.Println("Instruction decoded: LOAD_GLOBAL")
+		loadGlobal(instructionList[1], stack)
+
+	case "CALL_FUNCTION ":
+		fmt.Println("Instruction decoded: CALL_FUNCTION")
+		callFunction(instructionList[1], stack)
+
 	default:
 		fmt.Println("Instruction not implemented")
 		

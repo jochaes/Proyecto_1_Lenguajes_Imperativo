@@ -88,8 +88,11 @@ func main(){
 		ir = program[pc] 																//Carga la instrucción al registro de instrucción
 		instruction_processor.DecodeExecute(ir, &pc, &stack, &storage)		//Decodifica y ejecuta la instrucción
 		pc += 1																				  //Incrementa el PC para cargar la siguiente instrucción
+		fmt.Println()
 	}
 
-	fmt.Println(stack)
+	// fmt.Println("Stack y Almacen")
+	// fmt.Println(stack)
+	// fmt.Println(storage)
 
 }
