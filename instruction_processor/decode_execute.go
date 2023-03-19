@@ -70,6 +70,5 @@ func DecodeExecute(instruction string, pcPtr *int, stack *data_structures.Stack,
 	
 	default:
 		fmt.Println("Instruction not implemented")
-		
 	}
 }

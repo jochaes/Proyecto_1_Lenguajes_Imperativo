@@ -324,10 +324,10 @@ func binaryDivide(stack *data_structures.Stack){
 }
 
 /*
-Realiza una división entera de los operandos (OP1 / OP2)
+Realiza una AND entre los operandos (OP1 AND OP2)
 	stack: Pila del programa en dónde se ecuentran los operandos 
 
-	carga el resultado de la división en la pila
+	carga el resultado del AND en la pila
 */
 func binaryAnd(stack *data_structures.Stack){
 
@@ -349,10 +349,10 @@ func binaryAnd(stack *data_structures.Stack){
 }
 
 /*
-Realiza una división entera de los operandos (OP1 / OP2)
+Realiza un OR entre los operandos (OP1 OR OP2)
 	stack: Pila del programa en dónde se ecuentran los operandos 
 
-	carga el resultado de la división en la pila
+	carga el resultado del OR en la pila
 */
 func binaryOr(stack *data_structures.Stack){
 
