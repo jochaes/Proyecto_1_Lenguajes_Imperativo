@@ -32,14 +32,20 @@ func testStack(){
 	stack.Push(1)
 	stack.Push("hola")
 
-	if e:=stack.Pop();e!= nil{
+	if val,e:=stack.Pop();e!= nil{
 		fmt.Println(e)
+	}else{
+		fmt.Println(val)
 	}
-	if e:=stack.Pop();e!= nil{
+	if val,e:=stack.Pop();e!= nil{
 		fmt.Println(e)
+	}else{
+		fmt.Println(val)
 	}
-	if e:=stack.Pop();e!= nil{
+	if val,e:=stack.Pop();e!= nil{
 		fmt.Println(e)
+	}else{
+		fmt.Println(val)
 	}
 	fmt.Println(stack)
 }
@@ -66,6 +72,8 @@ func main(){
 	//Inicializacion de variables
 	pc = 0
 	ir = ""
+	storage = make(data_structures.MapTable)
+
 
 	//Carga el programa el memoria
 	loadProgram("prueba_1.txt")
@@ -78,8 +86,10 @@ func main(){
 		}
 
 		ir = program[pc] 																//Carga la instrucción al registro de instrucción
-		instruction_processor.DecodeExecute(ir, &pc)		//Decodifica y ejecuta la instrucción
+		instruction_processor.DecodeExecute(ir, &pc, &stack, &storage)		//Decodifica y ejecuta la instrucción
 		pc += 1																				  //Incrementa el PC para cargar la siguiente instrucción
 	}
+
+	fmt.Println(stack)
 
 }

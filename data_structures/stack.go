@@ -25,14 +25,14 @@ func (stack *Stack) Push(value any) {
 /*
 Elimina el top del stack
 */
-func (stack *Stack) Pop() error {
+func (stack *Stack) Pop() (any,error) {
 	if len(*stack) > 0 {
 		res,_ := (*stack).Peek()
 		fmt.Println("stack(pop):", res)
 		*stack = (*stack)[:len(*stack)-1]
-		return nil
+		return res,nil
 	} else {
-		return errors.New("stack(pop) error: the stack is empty")
+		return 0,errors.New("stack(pop) error: the stack is empty")
 	}
 }
 
