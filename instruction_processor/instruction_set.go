@@ -373,3 +373,22 @@ func binaryOr(stack *data_structures.Stack){
 	}
 }
 
+
+/*
+Realiza el cálculo del cociente de la division entre 2 operandos
+*/
+func binaryModulo(stack *data_structures.Stack){
+
+	op1, op2 := GetOperands( stack, "int")
+
+	if op1 == nil || op2 == nil {
+		fmt.Println("ERROR GETTING OPERANDS")
+		return 
+	}
+
+	result := any(op1).(int) % any(op2).(int)
+
+	stack.Push(result)
+
+}
+

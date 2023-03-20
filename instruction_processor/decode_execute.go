@@ -9,17 +9,18 @@ import (
 
 /*
 Decodifica la instrucción y la ejecuta
+
 	instruccion: instruccion a decodificar
 	pcPTR: Program Counter
 */
-func DecodeExecute(instruction string, pcPtr *int, stack *data_structures.Stack, storage *data_structures.MapTable){
+func DecodeExecute(instruction string, pcPtr *int, stack *data_structures.Stack, storage *data_structures.MapTable) {
 
 	fmt.Println("Decoding", instruction)
 
-	instructionList := strings.SplitAfterN(instruction, " ",2)
-	
+	instructionList := strings.SplitAfterN(instruction, " ", 2)
+
 	switch instructionList[0] {
-	
+
 	case "LOAD_CONST ":
 		fmt.Println("Instruction decoded: LOAD_CONST")
 		loadConst(instructionList[1], stack)
@@ -27,7 +28,7 @@ func DecodeExecute(instruction string, pcPtr *int, stack *data_structures.Stack,
 	case "LOAD_FAST ":
 		fmt.Println("Instruction decoded: LOAD_FAST")
 		loadFast(instructionList[1], stack, storage)
-		
+
 	case "STORE_FAST ":
 		fmt.Println("Instruction decoded: STORE_FAST")
 		storeFast(instructionList[1], stack, storage)
@@ -39,7 +40,7 @@ func DecodeExecute(instruction string, pcPtr *int, stack *data_structures.Stack,
 	case "CALL_FUNCTION ":
 		fmt.Println("Instruction decoded: CALL_FUNCTION")
 		callFunction(instructionList[1], stack)
-	
+
 	case "COMPARE_OP ":
 		fmt.Println("Instruction decoded: COMPARE_OP")
 		compareOp(instructionList[1], stack)
@@ -51,7 +52,7 @@ func DecodeExecute(instruction string, pcPtr *int, stack *data_structures.Stack,
 	case "BINARY_ADD":
 		fmt.Println("Instruction decoded: BINARY_ADD")
 		binaryAdd(stack)
-	
+
 	case "BINARY_MULTIPLY":
 		fmt.Println("Instruction decoded: BINARY_MULTIPLY")
 		binaryMultiply(stack)
@@ -59,7 +60,7 @@ func DecodeExecute(instruction string, pcPtr *int, stack *data_structures.Stack,
 	case "BINARY_DIVIDE":
 		fmt.Println("Instruction decoded: BINARY_DIVIDE")
 		binaryDivide(stack)
-	
+
 	case "BINARY_AND":
 		fmt.Println("Instruction decoded: BINARY_AND")
 		binaryAnd(stack)
@@ -67,7 +68,11 @@ func DecodeExecute(instruction string, pcPtr *int, stack *data_structures.Stack,
 	case "BINARY_OR":
 		fmt.Println("Instruction decoded: BINARY_OR")
 		binaryOr(stack)
-	
+
+	case "BINARY_MODULO":
+		fmt.Println("Instruction decoded: BINARY_MODULO")
+		binaryModulo(stack)
+
 	default:
 		fmt.Println("Instruction not implemented")
 	}
