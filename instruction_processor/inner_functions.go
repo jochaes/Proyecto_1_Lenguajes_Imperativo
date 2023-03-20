@@ -17,7 +17,7 @@ func print(params []any, stack *data_structures.Stack){
 
 	fmt.Println("*****")
 	fmt.Println("Funcion Interna de print")
-	fmt.Println("Printing stack: ")
+	fmt.Print("Printing stack: ")
 
 
 	// j := any(params[0]).(int)

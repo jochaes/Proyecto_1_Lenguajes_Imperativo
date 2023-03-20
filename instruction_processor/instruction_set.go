@@ -5,6 +5,7 @@ import (
 	"github.com/jochaes/Proyecto_1_Lenguajes_Imperativo/data_structures"
 	"strconv"
 	"reflect"
+	"strings"
 )
 
 /*
@@ -14,7 +15,43 @@ stack: Pila en la que se va a puhs el const
 */
 func loadConst[T any]( constVal T, stack *data_structures.Stack){
 	fmt.Println("Executing LOAD_CONST")
-	stack.Push(constVal)
+	
+	//Todo lo que le llega es siempre un string
+	newConst := any(constVal).(string)
+	//Convierte las cosas a string o a entero 
+	if strings.Contains(newConst,`"`){
+		fmt.Println("Metí un string")
+		newConst = strings.ReplaceAll(newConst,`"`,"")
+		stack.Push(newConst)
+	}else if strings.Contains(newConst,"[") && strings.Contains(newConst,"]"){
+
+		newConst = strings.ReplaceAll(newConst,"[", "")
+		newConst = strings.ReplaceAll(newConst,"]", "")
+		constSlice := strings.Split(newConst,",")
+
+		//Es un array de strings
+		if _,e := strconv.Atoi(constSlice[0]); e != nil {
+			stack.Push(constSlice) //Agrega el slice a la pila
+		} else{ //Es un slice de enteros
+			
+
+			constSliceInt := make([]int, len(constSlice))     //Crea un slice para los enteros
+			for i := 0; i < len(constSlice); i++ {						//Convierte los strings a enteros
+				constSliceInt[i],_= strconv.Atoi(constSlice[i])
+			}
+
+			stack.Push(constSliceInt)
+		}
+
+	}else{
+		newConstInt,err := strconv.Atoi(newConst)
+
+		if err != nil{
+			fmt.Println(err)
+			return
+		}
+		stack.Push(newConstInt)
+	}
 }
 
 /*
@@ -375,7 +412,11 @@ func binaryOr(stack *data_structures.Stack){
 
 
 /*
-Realiza el cálculo del cociente de la division entre 2 operandos
+Realiza el cálculo del cociente de la division entre 2 operandos (op1 % op2)
+	
+	stack: pila del pograma
+	retorna el resultado en la pila
+
 */
 func binaryModulo(stack *data_structures.Stack){
 
@@ -391,4 +432,34 @@ func binaryModulo(stack *data_structures.Stack){
 	stack.Push(result)
 
 }
+
+/*
+Realiza la operación: array[index] = value 
+ En la pila deben haber los siguientes elementos: [index, array, value] <- Tope de la pila 
+
+*/
+func storeSubscr(stack *data_structures.Stack){
+
+	// value,err := stack.Pop()
+	// if err != nil{
+	// 	fmt.Println(err)
+	// 	return 
+	// }
+
+	// array,err := stack.Pop()
+	// if err != nil{
+	// 	fmt.Println(err)
+	// 	return 
+	// }
+
+	// index,err := stack.Pop()
+	// if err != nil{
+	// 	fmt.Println(err)
+	// 	return 
+	// }
+
+
+}
+
+
 

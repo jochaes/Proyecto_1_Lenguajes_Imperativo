@@ -76,7 +76,7 @@ func main(){
 
 
 	//Carga el programa el memoria
-	loadProgram("prueba_1.txt")
+	loadProgram("prueba_2.txt")
 
 	//Simulación del ciclo de fetch-decodificación-ejecución
 	for{
