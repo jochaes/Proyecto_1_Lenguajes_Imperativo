@@ -73,6 +73,10 @@ func DecodeExecute(instruction string, pcPtr *int, stack *data_structures.Stack,
 		fmt.Println("Instruction decoded: BINARY_MODULO")
 		binaryModulo(stack)
 
+	case "STORE_SUBSCR":
+		fmt.Println("Instruction decoded: STORE_SUBSCR")
+		storeSubscr(stack, storage)
+
 	default:
 		fmt.Println("Instruction not implemented")
 	}

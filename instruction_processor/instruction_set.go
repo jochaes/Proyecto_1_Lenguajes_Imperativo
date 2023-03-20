@@ -237,6 +237,7 @@ Realiza una comparación booleana según el op que reciba
 */
 
 func compareOp[T any]( op T, stack *data_structures.Stack){
+	fmt.Println("Executing COMPARE_OP")
 
 	operator := any(op).(string)
 	
@@ -286,6 +287,7 @@ Realiza una resta de los operandos (OP1 - OP2)
 	carga el resultado de la resta la pila
 */
 func binarySubstract(stack *data_structures.Stack){
+	fmt.Println("Executing BINARY_SUBSTRACT")
 
 	op1, op2 := GetOperands( stack, "int")
 
@@ -307,6 +309,7 @@ Realiza una suma de los operandos (OP1 + OP2)
 	carga el resultado de la suma en la pila
 */
 func binaryAdd(stack *data_structures.Stack){
+	fmt.Println("Executing BINARY_ADD")
 
 	op1, op2 := GetOperands( stack, "int")
 
@@ -327,6 +330,7 @@ Realiza una multiplicación de los operandos (OP1 * OP2)
 	carga el resultado de la multiplicación en la pila
 */
 func binaryMultiply(stack *data_structures.Stack){
+	fmt.Println("Executing BINARY_MULTIPLY")
 
 	op1, op2 := GetOperands( stack, "int")
 
@@ -347,6 +351,7 @@ Realiza una división entera de los operandos (OP1 / OP2)
 	carga el resultado de la división en la pila
 */
 func binaryDivide(stack *data_structures.Stack){
+	fmt.Println("Executing BINARY_DIVIDE")
 
 	op1, op2 := GetOperands( stack, "int")
 
@@ -367,6 +372,7 @@ Realiza una AND entre los operandos (OP1 AND OP2)
 	carga el resultado del AND en la pila
 */
 func binaryAnd(stack *data_structures.Stack){
+	fmt.Println("Executing BINARY_AND")
 
 	op1, op2 := GetOperands( stack, "int")
 
@@ -392,6 +398,7 @@ Realiza un OR entre los operandos (OP1 OR OP2)
 	carga el resultado del OR en la pila
 */
 func binaryOr(stack *data_structures.Stack){
+	fmt.Println("Executing BINARY_OR")
 
 	op1, op2 := GetOperands( stack, "int")
 
@@ -419,6 +426,7 @@ Realiza el cálculo del cociente de la division entre 2 operandos (op1 % op2)
 
 */
 func binaryModulo(stack *data_structures.Stack){
+	fmt.Println("Executing BINARY_MODULO")
 
 	op1, op2 := GetOperands( stack, "int")
 
@@ -438,27 +446,45 @@ Realiza la operación: array[index] = value
  En la pila deben haber los siguientes elementos: [index, array, value] <- Tope de la pila 
 
 */
-func storeSubscr(stack *data_structures.Stack){
+func storeSubscr(stack *data_structures.Stack, storage *data_structures.MapTable){
+	fmt.Println("Executing STORE_SUBSCR")
+	
+	value,err := stack.Pop()
+	if err != nil{
+		fmt.Println(err)
+		return 
+	}
 
-	// value,err := stack.Pop()
-	// if err != nil{
-	// 	fmt.Println(err)
-	// 	return 
-	// }
+	arrayRef,err := stack.Pop()
+	if err != nil{
+		fmt.Println(err)
+		return 
+	}
 
-	// array,err := stack.Pop()
-	// if err != nil{
-	// 	fmt.Println(err)
-	// 	return 
-	// }
+	index,err := stack.Pop()
+	if err != nil{
+		fmt.Println(err)
+		return 
+	}
 
-	// index,err := stack.Pop()
-	// if err != nil{
-	// 	fmt.Println(err)
-	// 	return 
-	// }
+	array,err := storage.Get(any(arrayRef).(string))
 
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 
+	//Si el tipo del value eas entero, entonces asume que el array es un []int
+
+	if reflect.ValueOf(value).Kind() == reflect.Int{
+		
+		any(array).([]int)[any(index).(int)] = any(value).(int)
+
+	}else{
+		any(array).([]string)[any(index).(int)] = any(value).(string)
+	}
+
+	storage.Update(any(arrayRef).(string), array)
 }
 
 
