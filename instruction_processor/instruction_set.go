@@ -445,10 +445,19 @@ func binaryModulo(stack *data_structures.Stack){
 Realiza la operación: array[index] = value 
  En la pila deben haber los siguientes elementos: [index, array, value] <- Tope de la pila 
 
+ Programa de prueba:
+ En el almacen en "y" ya debemos tener guardada una lista
+
+ 	LOAD_CONST 0     - Indice
+	LOAD_GLOBAL y		 - Referencia al array
+	LOAD_CONST 90    - Valor que queremos guardar
+	STORE_SUBSCR
+
+
 */
 func storeSubscr(stack *data_structures.Stack, storage *data_structures.MapTable){
 	fmt.Println("Executing STORE_SUBSCR")
-	
+
 	value,err := stack.Pop()
 	if err != nil{
 		fmt.Println(err)
