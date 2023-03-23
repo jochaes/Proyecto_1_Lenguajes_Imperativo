@@ -497,4 +497,37 @@ func storeSubscr(stack *data_structures.Stack, storage *data_structures.MapTable
 }
 
 
+/*
+Carga en el tope de la pila el elemento de un arreglo en el indice indicado 
+	stack: pila del programa
+	storage: almacen de datos 
+*/
+
+func binarySubscr (stack *data_structures.Stack, storage *data_structures.MapTable){
+	
+	//Saca la referencia del array del Stack 
+	arrayRef,err := stack.Pop()
+	if err != nil{
+		fmt.Println(err)
+		return 
+	}
+
+	//Carga el array del almacen
+	array,err := storage.Get(any(arrayRef).(string))
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	//Saca de la pila en indice 
+	index,err := stack.Pop()
+	if err != nil{
+		fmt.Println(err)
+		return 
+	}
+
+	//Saca el valor del array y lo pone al tope de la pila 
+	stack.Push( any(array).([]any)[any(index).(int)] )
+}
+
 
