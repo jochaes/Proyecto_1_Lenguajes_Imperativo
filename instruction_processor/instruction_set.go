@@ -531,3 +531,70 @@ func binarySubscr (stack *data_structures.Stack, storage *data_structures.MapTab
 }
 
 
+/*
+Salta a la linea de código indicada por target
+	target: Target es un indice indicativo en el archivo que debe coincidir con el numero de instruccion una vez almacenado en el codigo de memoria. Osea el numero al que va a saltar
+	pc: Program counter, carga la proxima instruccion en memoria 
+*/
+func jumpAbsolute(target string, pc *int){
+	
+	newTarget,_ := strconv.Atoi(target)
+	newTarget -= 1   //Ya que la instrucción suma 1 cuando termina el decode/execute
+
+	//Actualiza el PC para que la siguiente instruccion a ejecutar sea el target 
+	*pc = newTarget
+}
+
+/*
+Si el tope de la pila es True salta al target
+	target: Target es un indice indicativo en el archivo que debe coincidir con el numero de instruccion una vez almacenado en el codigo de memoria. Osea el numero al que va a saltar
+	pc: Program counter, carga la proxima instruccion en memoria 
+*/
+
+func jumpTrue(target string, stack *data_structures.Stack, pc *int){
+	newTarget,_ := strconv.Atoi(target)
+	newTarget -= 1   //Ya que la instrucción suma 1 cuando termina el decode/execute
+
+	//Saca la referencia del array del Stack 
+	value,err := stack.Pop()
+	if err != nil{
+		fmt.Println(err)
+		return 
+	}
+
+	newValue,_ :=  strconv.Atoi(any(value).(string))
+
+	//1 = true
+	//0 = false
+	if newValue == 1 {
+		*pc = newTarget
+	}
+
+
+}
+
+/*
+Si el tope de la pila es False salta al target
+	target: Target es un indice indicativo en el archivo que debe coincidir con el numero de instruccion una vez almacenado en el codigo de memoria. Osea el numero al que va a saltar
+	pc: Program counter, carga la proxima instruccion en memoria 
+*/
+
+func jumpFalse(target string, stack *data_structures.Stack, pc *int){
+	newTarget,_ := strconv.Atoi(target)
+	newTarget -= 1   //Ya que la instrucción suma 1 cuando termina el decode/execute
+
+	//Saca la referencia del array del Stack 
+	value,err := stack.Pop()
+	if err != nil{
+		fmt.Println(err)
+		return 
+	}
+
+	newValue,_ :=  strconv.Atoi(any(value).(string))
+
+	//1 = true
+	//0 = false
+	if newValue == 0 {
+		*pc = newTarget
+	}
+}

@@ -76,8 +76,21 @@ func DecodeExecute(instruction string, pcPtr *int, stack *data_structures.Stack,
 	case "STORE_SUBSCR":
 		fmt.Println("Instruction decoded: STORE_SUBSCR")
 		storeSubscr(stack, storage)
+	case "BINARY_SUBSCR":
+		fmt.Println("Instruction decoded: BINARY_SUBSCR")
+		binarySubscr(stack, storage)
+	case "JUMP_ABSOLUTE ":
+		fmt.Println("Instruction decoded: JUMP_ABSOLUTE")
+		jumpAbsolute(instructionList[1], pcPtr)
+	case "JUMP_IF_TRUE ":
+		fmt.Println("Instruction decoded: JUMP_IF_TRUE")
+		jumpTrue(instructionList[1], stack,pcPtr)
+	case "JUMP_IF_FALSE ":
+		fmt.Println("Instruction decoded: JUMP_IF_FALSE")
+		jumpFalse(instructionList[1],stack, pcPtr)
 
 	default:
 		fmt.Println("Instruction not implemented")
 	}
 }
+
