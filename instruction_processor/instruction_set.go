@@ -598,3 +598,39 @@ func jumpFalse(target string, stack *data_structures.Stack, pc *int){
 		*pc = newTarget
 	}
 }
+
+
+/*
+Construye una lista con "elements" cantidad de elementos 
+	elements: cantidad de elementos en la lista, que están en la pila
+	stack: pila del programa, en dónde se encuentran los elementos de la lista 
+	
+	Deja la lista en la pila
+*/
+func buildList(elements string, stack *data_structures.Stack){
+	//Saca la cantidad de elementos que tiene que sacar de la lista
+	listElements,_ := strconv.Atoi(elements)
+	
+	list := make([]any, listElements)
+
+
+	//El último elemento está al tope de la pila
+	// por eso va al "revez"
+	for i := listElements-1; i >= 0; i-- {
+
+		element,err := stack.Pop()
+		if err != nil{
+			fmt.Println(err)
+			return 
+		}
+		list[i] = element
+	}
+
+	stack.Push(list)
+}
+
+func end(){
+
+	fmt.Println("Última instrucción del programa")
+
+}
