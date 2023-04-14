@@ -1,5 +1,6 @@
 package data_structures
 
+
 import (
 	"errors"
 	"fmt"
@@ -18,7 +19,7 @@ Agrega elementos a la pila
 value: El dato a agregar a la pila
 */
 func (stack *Stack) Push(value any) {
-	fmt.Println("stack(push):", value)
+	if debugMode {fmt.Println("stack(push):", value)}
 	*stack = append(*stack, Node{value})
 }
 
@@ -28,7 +29,7 @@ Elimina el top del stack
 func (stack *Stack) Pop() (any,error) {
 	if len(*stack) > 0 {
 		res,_ := (*stack).Peek()
-		fmt.Println("stack(pop):", res)
+		if debugMode {fmt.Println("stack(pop):", res)}
 		*stack = (*stack)[:len(*stack)-1]
 		return res,nil
 	} else {
@@ -41,7 +42,7 @@ Devuelve el elemento al tope del stack
 */
 func (stack *Stack) Peek() (any,error) {
 	if len(*stack) > 0 {
-		fmt.Println("stack(Peek):", (*stack)) //Imprime todo el stack
+		if debugMode {fmt.Println("stack(Peek):", (*stack))} //Imprime todo el stack
 		 peekVal := (*stack)[len(*stack)-1]
 		return peekVal.Valor , nil
 	} else {

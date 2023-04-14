@@ -10,6 +10,7 @@ import (
 	"os"
 )
 
+
 /*
 Abre y devuelve el puntero a un archivo
 	fileName: ruta del archivo

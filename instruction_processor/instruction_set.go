@@ -14,13 +14,13 @@ constVal: Valor a insertar en la pila
 stack: Pila en la que se va a puhs el const
 */
 func loadConst[T any]( constVal T, stack *data_structures.Stack){
-	fmt.Println("Executing LOAD_CONST")
+	if debugMode{fmt.Println("Executing LOAD_CONST")}
 	
 	//Todo lo que le llega es siempre un string
 	newConst := any(constVal).(string)
 	//Convierte las cosas a string o a entero 
 	if strings.Contains(newConst,`"`){
-		fmt.Println("Metí un string")
+		if debugMode{fmt.Println("Metí un string")}
 		newConst = strings.ReplaceAll(newConst,`"`,"")
 		stack.Push(newConst)
 	}else if strings.Contains(newConst,"[") && strings.Contains(newConst,"]"){
@@ -61,7 +61,7 @@ Coloca el valor del contenido de la variable en el tope de la pila
 	pc: program counter 
 */
 func loadFast(varName string, stack *data_structures.Stack, storage *data_structures.MapTable){
-	fmt.Println("Executing LOAD_FAST")
+	if debugMode{fmt.Println("Executing LOAD_FAST")}
 	
 	val, e := storage.Get(varName)
 
@@ -81,7 +81,7 @@ Coloca el valor del contenido de la variable en el tope de la pila
 	pc: program counter 
 */
 func storeFast(varName string, stack *data_structures.Stack, storage *data_structures.MapTable){
-	fmt.Println("Executing LOAD_FAST")
+	if debugMode{fmt.Println("Executing LOAD_FAST")}
 	
 	val, e := stack.Pop()
 
@@ -125,7 +125,7 @@ Carga en el stack el valor de una variable global o la referencia de una funció
 	stack: pila del programa en dónde se cargará la referencia de la función. 
 */
 func loadGlobal[T any]( name T, stack *data_structures.Stack){
-	fmt.Println("Executing LOAD_GLOBAL")
+	if debugMode{fmt.Println("Executing LOAD_GLOBAL")}
 	stack.Push(name)
 }
 
@@ -139,13 +139,13 @@ Llama a la función con sus parámetros
 	stack: pila del programa
 */
 func callFunction[T any]( params T, stack *data_structures.Stack ){
-	fmt.Println("Executing CALL_FUNCTION")
+	if debugMode{fmt.Println("Executing CALL_FUNCTION")}
 	
 
 	//Cómo ya sabemos que solo se va a ejecutar la función interna de printStack entonces el parámetro
 	// es la cantidad de elementos del stack que va a imprimir, entonces convierte params a entero
+	
 	cantidadParams,err := strconv.Atoi( any(params).(string) )
-
 	if err != nil {
 		fmt.Println("Error during conversion")
 		return
@@ -155,12 +155,12 @@ func callFunction[T any]( params T, stack *data_structures.Stack ){
 
 	for i := 0; i < cantidadParams; i++ {
 		val, e := stack.Pop()
-
+		if debugMode{println("Añadiendo parametro: ", val)}
 		if e!= nil{
 			fmt.Println(e)
 			return
 		}else{
-			//Añade los paramatros de la función en un slice 
+			//Añade los paramatros de la función en un slice 			
 			parameters = append(parameters, val)
 		}
 	}
@@ -237,7 +237,7 @@ Realiza una comparación booleana según el op que reciba
 */
 
 func compareOp[T any]( op T, stack *data_structures.Stack){
-	fmt.Println("Executing COMPARE_OP")
+	if debugMode{fmt.Println("Executing COMPARE_OP")}
 
 	operator := any(op).(string)
 	
@@ -253,9 +253,11 @@ func compareOp[T any]( op T, stack *data_structures.Stack){
 		return
 	}
 
-	op1,_ := strconv.Atoi( any(operand1).(string) )
-	op2,_ := strconv.Atoi( any(operand2).(string) )
+	// op1,_ := strconv.Atoi( any(operand1).(string) )
+	// op2,_ := strconv.Atoi( any(operand2).(string) )
 
+	op1 := operand1.(int)
+	op2 := operand2.(int)
 
 	switch operator {
 		case "<":
@@ -287,7 +289,7 @@ Realiza una resta de los operandos (OP1 - OP2)
 	carga el resultado de la resta la pila
 */
 func binarySubstract(stack *data_structures.Stack){
-	fmt.Println("Executing BINARY_SUBSTRACT")
+	if debugMode{fmt.Println("Executing BINARY_SUBSTRACT")}
 
 	op1, op2 := GetOperands( stack, "int")
 
@@ -296,10 +298,10 @@ func binarySubstract(stack *data_structures.Stack){
 		return 
 	}
 
-	result := any(op1).(int) - any(op2).(int)
+	//result := any(op1).(int) - any(op2).(int)
+	result := op1.(int) - op2.(int)
 
 	stack.Push(result)
-
 }
 
 /*
@@ -309,7 +311,7 @@ Realiza una suma de los operandos (OP1 + OP2)
 	carga el resultado de la suma en la pila
 */
 func binaryAdd(stack *data_structures.Stack){
-	fmt.Println("Executing BINARY_ADD")
+	if debugMode{fmt.Println("Executing BINARY_ADD")}
 
 	op1, op2 := GetOperands( stack, "int")
 
@@ -330,7 +332,7 @@ Realiza una multiplicación de los operandos (OP1 * OP2)
 	carga el resultado de la multiplicación en la pila
 */
 func binaryMultiply(stack *data_structures.Stack){
-	fmt.Println("Executing BINARY_MULTIPLY")
+	if debugMode{fmt.Println("Executing BINARY_MULTIPLY")}
 
 	op1, op2 := GetOperands( stack, "int")
 
@@ -351,7 +353,7 @@ Realiza una división entera de los operandos (OP1 / OP2)
 	carga el resultado de la división en la pila
 */
 func binaryDivide(stack *data_structures.Stack){
-	fmt.Println("Executing BINARY_DIVIDE")
+	if debugMode{fmt.Println("Executing BINARY_DIVIDE")}
 
 	op1, op2 := GetOperands( stack, "int")
 
@@ -372,7 +374,7 @@ Realiza una AND entre los operandos (OP1 AND OP2)
 	carga el resultado del AND en la pila
 */
 func binaryAnd(stack *data_structures.Stack){
-	fmt.Println("Executing BINARY_AND")
+	if debugMode{fmt.Println("Executing BINARY_AND")}
 
 	op1, op2 := GetOperands( stack, "int")
 
@@ -398,7 +400,7 @@ Realiza un OR entre los operandos (OP1 OR OP2)
 	carga el resultado del OR en la pila
 */
 func binaryOr(stack *data_structures.Stack){
-	fmt.Println("Executing BINARY_OR")
+	if debugMode{fmt.Println("Executing BINARY_OR")}
 
 	op1, op2 := GetOperands( stack, "int")
 
@@ -426,7 +428,7 @@ Realiza el cálculo del cociente de la division entre 2 operandos (op1 % op2)
 
 */
 func binaryModulo(stack *data_structures.Stack){
-	fmt.Println("Executing BINARY_MODULO")
+	if debugMode{fmt.Println("Executing BINARY_MODULO")}
 
 	op1, op2 := GetOperands( stack, "int")
 
@@ -456,7 +458,7 @@ Realiza la operación: array[index] = value
 
 */
 func storeSubscr(stack *data_structures.Stack, storage *data_structures.MapTable){
-	fmt.Println("Executing STORE_SUBSCR")
+	if debugMode{fmt.Println("Executing STORE_SUBSCR")}
 
 	value,err := stack.Pop()
 	if err != nil{
@@ -502,25 +504,35 @@ Carga en el tope de la pila el elemento de un arreglo en el indice indicado
 	stack: pila del programa
 	storage: almacen de datos 
 */
-
 func binarySubscr (stack *data_structures.Stack, storage *data_structures.MapTable){
+	if debugMode{fmt.Println("Executing BINARY_SUBSCR")}
 	
-	//Saca la referencia del array del Stack 
-	arrayRef,err := stack.Pop()
+	// //Saca la referencia del array del Stack 
+	// arrayRef,err := stack.Pop()
+	// if err != nil{
+	// 	fmt.Println(err)
+	// 	return 
+	// }
+
+	// //Carga el array del almacen
+	// array,err := storage.Get( strconv.Itoa(arrayRef.(int)))
+
+	// //array,error := storage.Get(arrayRef.(string))
+	// if err != nil {
+	// 	fmt.Println("FFFFFFFf")
+	// 	fmt.Println(err)
+	// 	return
+	// }
+
+	//Saca de la pila en indice 
+	index,err := stack.Pop()
 	if err != nil{
 		fmt.Println(err)
 		return 
 	}
 
-	//Carga el array del almacen
-	array,err := storage.Get(any(arrayRef).(string))
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	//Saca de la pila en indice 
-	index,err := stack.Pop()
+	//Saca de la pila la lista 
+	array,err := stack.Pop()
 	if err != nil{
 		fmt.Println(err)
 		return 
@@ -537,6 +549,7 @@ Salta a la linea de código indicada por target
 	pc: Program counter, carga la proxima instruccion en memoria 
 */
 func jumpAbsolute(target string, pc *int){
+	if debugMode{fmt.Println("Executing JUMP_ABSOLUTE")}
 	
 	newTarget,_ := strconv.Atoi(target)
 	newTarget -= 1   //Ya que la instrucción suma 1 cuando termina el decode/execute
@@ -552,6 +565,7 @@ Si el tope de la pila es True salta al target
 */
 
 func jumpTrue(target string, stack *data_structures.Stack, pc *int){
+	if debugMode{fmt.Println("Executing JUMP_TRUE")}
 	newTarget,_ := strconv.Atoi(target)
 	newTarget -= 1   //Ya que la instrucción suma 1 cuando termina el decode/execute
 
@@ -562,14 +576,14 @@ func jumpTrue(target string, stack *data_structures.Stack, pc *int){
 		return 
 	}
 
-	newValue,_ :=  strconv.Atoi(any(value).(string))
+	//newValue,_ :=  strconv.Atoi(any(value).(string))
+	newValue := any(value).(int)
 
 	//1 = true
 	//0 = false
 	if newValue == 1 {
 		*pc = newTarget
 	}
-
 
 }
 
@@ -580,6 +594,7 @@ Si el tope de la pila es False salta al target
 */
 
 func jumpFalse(target string, stack *data_structures.Stack, pc *int){
+	if debugMode{fmt.Println("Executing JUMP_FALSE")}
 	newTarget,_ := strconv.Atoi(target)
 	newTarget -= 1   //Ya que la instrucción suma 1 cuando termina el decode/execute
 
@@ -590,7 +605,9 @@ func jumpFalse(target string, stack *data_structures.Stack, pc *int){
 		return 
 	}
 
-	newValue,_ :=  strconv.Atoi(any(value).(string))
+	//newValue,_ :=  strconv.Atoi(any(value).(string))
+
+	newValue := any(value).(int)
 
 	//1 = true
 	//0 = false
@@ -608,6 +625,7 @@ Construye una lista con "elements" cantidad de elementos
 	Deja la lista en la pila
 */
 func buildList(elements string, stack *data_structures.Stack){
+	if debugMode{fmt.Println("Executing BUILD_LIST")}
 	//Saca la cantidad de elementos que tiene que sacar de la lista
 	listElements,_ := strconv.Atoi(elements)
 	
@@ -630,6 +648,7 @@ func buildList(elements string, stack *data_structures.Stack){
 }
 
 func end(){
+	if debugMode{fmt.Println("Executing END")}
 
 	fmt.Println("Última instrucción del programa")
 

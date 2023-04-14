@@ -7,6 +7,7 @@ import (
 	"github.com/jochaes/Proyecto_1_Lenguajes_Imperativo/data_structures"
 	"github.com/jochaes/Proyecto_1_Lenguajes_Imperativo/file_management"
 	"github.com/jochaes/Proyecto_1_Lenguajes_Imperativo/instruction_processor"
+	"github.com/jochaes/Proyecto_1_Lenguajes_Imperativo/config"
 	//"github.com/jochaes/Proyecto_1_Lenguajes_Imperativo/data_structures"
 )
 
@@ -16,13 +17,14 @@ var ir string 				//Instruction Register: Guarda la instrucción que se debe dec
 var program []string 	//Memoria del programa
 var stack data_structures.Stack
 var storage (data_structures.MapTable)
+var debugMode bool = config.DebugMode
 
 /**
 	Carga el programa en memoria 
 	filame: nombre del archivo a cargar, el archivo debe estar en la carpeta ./test_code
 **/
-func loadProgram(fileName string){
-	var filePtr *os.File = file_management.OpenFile("test_code/"+fileName)
+func loadProgram(filePath string){
+	var filePtr *os.File = file_management.OpenFile(filePath)
 	program = file_management.ReadFile(filePtr)
 	file_management.CloseFile(filePtr)
 }
@@ -76,10 +78,11 @@ func main(){
 
 
 	//Carga el programa el memoria
-	loadProgram("prueba_3.txt")
+	loadProgram("test_programs/Programa_Prueba.txt")
 
 	//Simulación del ciclo de fetch-decodificación-ejecución
 	for{
+		
 		if pc >= len(program) { 
 			fmt.Println("End of Execution")
 			break	
@@ -88,11 +91,15 @@ func main(){
 		ir = program[pc] 																//Carga la instrucción al registro de instrucción
 		instruction_processor.DecodeExecute(ir, &pc, &stack, &storage)		//Decodifica y ejecuta la instrucción
 		pc += 1																				  //Incrementa el PC para cargar la siguiente instrucción
-		fmt.Println()
+		if debugMode{ fmt.Println()}
 	}
 
-	fmt.Println("Stack y Almacen")
+	
+	fmt.Println("\nStack y Almacen")
 	fmt.Println(stack)
 	fmt.Println(storage)
 
 }
+
+
+
