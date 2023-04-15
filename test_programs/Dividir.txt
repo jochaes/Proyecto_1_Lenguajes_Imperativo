@@ -1,0 +1,19 @@
+LOAD_CONST 2
+STORE_FAST Z
+LOAD_CONST 10
+STORE_FAST Y
+LOAD_FAST Y
+LOAD_FAST Z
+BINARY_DIVIDE
+STORE_FAST X
+LOAD_GLOBAL print
+LOAD_FAST X
+CALL_FUNCTION 1
+END
+
+//Realiza la operacion X = Y/Z e imprime el resultado 
+  def Dividir():
+    Z = 2
+    Y = 10
+    X = Y / Z
+    print(X)

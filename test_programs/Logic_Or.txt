@@ -1,0 +1,28 @@
+LOAD_GLOBAL print
+LOAD_CONST 1
+LOAD_CONST 1
+BINARY_OR
+CALL_FUNCTION 1
+LOAD_GLOBAL print
+LOAD_CONST 0
+LOAD_CONST 1
+BINARY_OR
+CALL_FUNCTION 1
+LOAD_GLOBAL print
+LOAD_CONST 1
+LOAD_CONST 0
+BINARY_OR
+CALL_FUNCTION 1
+LOAD_GLOBAL print
+LOAD_CONST 0
+LOAD_CONST 0
+BINARY_OR
+CALL_FUNCTION 1
+END
+
+//Imprime los resultados de la tabla de verdad del or logico 
+  def Logig_Or():
+    print(true  || true)  // true = 1 
+    print(false || true)  // true =1
+    print(true  || false) // true = 1
+    print(false || false) // false = 0

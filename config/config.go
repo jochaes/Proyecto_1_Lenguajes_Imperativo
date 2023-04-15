@@ -1,4 +1,4 @@
 package config
 
 
-var DebugMode bool = true
+var DebugMode bool = false

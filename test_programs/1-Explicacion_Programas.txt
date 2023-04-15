@@ -1,0 +1,75 @@
+
+Instituto Tecnológico de Costa Rica
+Escuela de Computación
+Curso de Lenguajes de computación 
+
+
+Proyecto 1 - Lenguage Imperativo
+Estudiante: Josue Chaves Araya
+
+- Este documento contiene los códigos en python de cada bytecode
+  de prueba. 
+  
+
+
+1- Programa_Prueba.txt 
+  //Imprime los números pares contenidos en una lista 
+  def Programa_Prueba() :
+    x = 0 
+    lista = [0,1,2,3,4,5,6,7,8,9] 
+    while (x < 10): 
+        if(x%2==0): 
+            print(lista[x]) 
+        x = x + 1
+
+  
+2- Sumar_Lista.txt
+  //Imprime la suma de números contenidos en una lista
+  def Sumar_Lista():
+    cont = 0
+    sum = 0
+    lista = [0,1,2,3,4,5]
+    while (cont < 6):
+      sum = sum + lista[x]
+      x = x + 1 
+    print(sum)
+
+
+3- Lista_Imprimir.txt
+  //Imprime una lista de n elementos desde n-1 hasta 0 
+  def Lista_Imprimir():
+    atsil = [0,2,3,4,5]
+    cont = 5
+    while (cont > 0)
+      print(atsil[cont-1])
+      cont = cont - 1
+
+4- AND_Multiplicar_Var.txt
+  //Multiplica una variabe por 5, si esta variable es menor a 5 y mayor a 1 
+  
+  def AND_Multiplicar_Var():
+    var = 4
+    if( (var > 1) && (var < 5) ) :
+      var = var * 5
+    print(var)
+  def AND_Multiplicar_Var():
+      var = 4
+      if( (var > 1) && (var < 5) ) :
+        var = var * 5
+      print(var)
+
+5- Logic_Or.txt
+  //Imprime los resultados de la tabla de verdad del or logico 
+  def Logig_Or():
+    print(true  || true)  // true = 1 
+    print(false || true)  // true =1
+    print(true  || false) // true = 1
+    print(false || false) // false = 0
+
+6- Dividir.txt
+  //Realiza la operacion X = Y/Z e imprime el resultado 
+  def Dividir():
+    Z = 2
+    Y = 10
+    X = Y / Z
+    print(X)

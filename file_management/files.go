@@ -10,9 +10,9 @@ import (
 	"os"
 )
 
-
 /*
 Abre y devuelve el puntero a un archivo
+
 	fileName: ruta del archivo
 */
 func OpenFile(fileName string) *os.File {
@@ -28,13 +28,13 @@ func OpenFile(fileName string) *os.File {
 	return f
 }
 
-
 /*
-Lee, guarda y devuelve las lineas en un slice 
- filePtr: puntero al archivo abierto
- */
+Lee, guarda y devuelve las lineas en un slice
+
+	filePtr: puntero al archivo abierto
+*/
 func ReadFile(filePtr *os.File) []string {
-	var instructions []string     
+	var instructions []string
 
 	scanner := bufio.NewScanner(filePtr)
 
@@ -51,7 +51,8 @@ func ReadFile(filePtr *os.File) []string {
 }
 
 /*
-Cierra un archivo previemante abierto 
+Cierra un archivo previemante abierto
+
 	fileptr: puntero al archivo
 */
 func CloseFile(filePtr *os.File) {

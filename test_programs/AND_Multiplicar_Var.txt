@@ -1,0 +1,31 @@
+LOAD_CONST 3
+STORE_FAST var
+LOAD_FAST var
+LOAD_CONST 1
+COMPARE_OP >
+LOAD_FAST var
+LOAD_CONST 5
+COMPARE_OP <
+BINARY_AND
+JUMP_IF_FALSE 14
+LOAD_FAST var
+LOAD_CONST 5
+BINARY_MULTIPLY
+STORE_FAST var
+LOAD_GLOBAL print
+LOAD_FAST var
+CALL_FUNCTION 1
+END
+
+//Multiplica una variabe por 5, si esta variable es menor a 5 y mayor a 1 
+  
+  def AND_Multiplicar_Var():
+    var = 4
+    if( (var > 1) && (var < 5) ) :
+      var = var * 5
+    print(var)
+  def AND_Multiplicar_Var():
+      var = 4
+      if( (var > 1) && (var < 5) ) :
+        var = var * 5
+      print(var)

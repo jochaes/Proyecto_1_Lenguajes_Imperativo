@@ -1,0 +1,44 @@
+LOAD_CONST 0
+STORE_FAST cont
+LOAD_CONST 0
+STORE_FAST sum
+LOAD_CONST 0
+LOAD_CONST 1
+LOAD_CONST 2
+LOAD_CONST 3
+LOAD_CONST 4
+LOAD_CONST 5
+BUILD_LIST 6
+STORE_FAST lista
+LOAD_FAST cont
+LOAD_CONST 6
+COMPARE_OP <
+JUMP_IF_FALSE 30
+LOAD_FAST sum
+LOAD_FAST lista
+LOAD_FAST cont
+BINARY_SUBSCR
+BINARY_ADD
+STORE_FAST sum
+LOAD_FAST cont
+LOAD_CONST 1
+BINARY_ADD
+STORE_FAST cont
+LOAD_FAST cont
+LOAD_CONST 6
+COMPARE_OP <
+JUMP_IF_TRUE 16
+LOAD_GLOBAL print
+LOAD_FAST sum
+CALL_FUNCTION 1
+END
+
+//Imprime la suma de números contenidos en una lista
+  def Sumar_Lista():
+    cont = 0
+    sum = 0
+    lista = [0,1,2,3,4,5]
+    while (cont < 6):
+      sum = sum + lista[x]
+      x = x + 1 
+    print(sum)
