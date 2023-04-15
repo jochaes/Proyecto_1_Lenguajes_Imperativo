@@ -45,11 +45,11 @@ func main() {
 	//Carga el programa en memoria
 	
 	//loadProgram("test_programs/Programa_Prueba.txt") // Programa de prueba de la especificación del proyecto
-	//loadProgram("test_programs/Sumar_Lista.txt") // Suma una lista de enteros
+	loadProgram("test_programs/Sumar_Lista.txt") // Suma una lista de enteros
 	//loadProgram("test_programs/Lista_Imprimir.txt") // Imprime una lista al revez
 	//loadProgram("test_programs/AND_Multiplicar_Var.txt") // Multiplica una variable por 5 si var > 1 && var < 5
 	//loadProgram("test_programs/Logic_Or.txt") //Imprime los resultados de la tabla de verdad de la operacion OR true = 1, false = 0
-	loadProgram("test_programs/Dividir.txt") // x = Y / Z
+	//loadProgram("test_programs/Dividir.txt") // x = Y / Z
 
 	//Simulación del ciclo de fetch-decodificación-ejecución
 	for {
